@@ -140,32 +140,6 @@ To safeguard Patient Health Information (PHI) stored in third-party databases, M
 - All patient context payloads are encrypted using **AES-256-GCM** before writing to Redis.
 - Payloads are decrypted on read, using a unique 32-byte `DATABASE_ENCRYPTION_KEY`.
 
-## Architectural Limitations
-
-### 2. Regex-Based Output Filtering
-
-Layer 3's regex patterns use strict `\b` word boundaries, but:
-
-- **False Negatives**: Creative phrasing, misspellings, or euphemisms can bypass regex entirely (e.g., "take 2 of those pills" might not match if the drug name isn't listed).
-- **False Positives**: Legitimate sentences mentioning medication in a non-prescriptive context could be filtered.
-- **Solution**: For production, implement **semantic evaluation** using a secondary LLM call or a fine-tuned classifier to assess output safety. Consider using Guardrails AI or NeMo Guardrails.
-
-### 3. Classification Reliability
-
-LLM-based classification (Layer 1) can be inconsistent:
-
-- **Prompt Injection**: A sophisticated user could craft messages to trick the classifier.
-- **Solution**: Combine with embedding-based semantic similarity and maintain a continuously updated blocklist.
-
-### 4. No Rate Limiting
-
-The current implementation has no rate limiting on API routes. In production:
-
-- Implement per-session rate limiting (e.g., 20 messages per minute)
-- Add CAPTCHA for the check-in form
-- Use Vercel's Edge Middleware for IP-based rate limiting
-
----
 
 ## Local Setup
 
