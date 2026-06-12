@@ -2,22 +2,7 @@
 
 A safety-critical healthcare web application featuring a multi-step patient check-in form, zero-trust session management, and an AI companion ("Ava") with a 4-layer guardrail architecture for safe, empathetic patient interaction.
 
-> ⚠️ **This is a demonstration application.** While it implements real safety patterns, it is not production-ready for actual healthcare use without additional hardening (see [Architectural Limitations](#architectural-limitations)).
-
----
-
-## Table of Contents
-
-- [Architecture & Zero-Trust](#architecture--zero-trust)
-- [Safety Deep Dive](#safety-deep-dive)
-- [Telemetry & Audit Trail](#telemetry--audit-trail)
-- [Architectural Limitations](#architectural-limitations)
-- [Local Setup](#local-setup)
-- [Tech Stack](#tech-stack)
-
----
-
-## Architecture & Zero-Trust
+## Architecture
 
 ### HttpOnly Cookie Implementation
 
@@ -215,13 +200,13 @@ cp .env.local.example .env.local
 | `EMERGENCY_PHONE` | No | `112` | Emergency services number (localize for your region) |
 | `CRISIS_PHONE` | No | `988` | Crisis/suicide hotline number (localize for your region) |
 
-### Running Locally
+### Deployment
 
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to see the check-in form.
+Open [[http://localhost:3000](https://patient-checkin-app.vercel.app/)](https://patient-checkin-app.vercel.app/) to see the check-in form.
 
 ### Testing the Safety Layers
 
